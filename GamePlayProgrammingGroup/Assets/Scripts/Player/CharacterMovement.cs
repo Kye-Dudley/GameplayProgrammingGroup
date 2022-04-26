@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
     private float movementSpeed;
     public float acceleration = 10;
     public float rotationSpeed = 10;
-    public float jumpHeight = 10;
+    public float jumpHeight = 5;
     private bool jumpInput;
     public float groundSpeed = 10;
     public float airControl = 7;
@@ -225,11 +225,16 @@ public class CharacterMovement : MonoBehaviour
     {
         if ((playerAirTime < cyoteTime) || (JumpCount > 0))
         {
-            JumpCount = JumpCount - 1;
+            //JumpCount = JumpCount - 1;
             resetGrav = false;
             playerAirTime = cyoteTime;
             jumpBufferTimer = 0f;
             velocity.y = jumpHeight;
         }
+    }
+
+    public void updateMovementSpeed(float speedChange)
+    {
+        movementSpeed *= speedChange;
     }
 }
