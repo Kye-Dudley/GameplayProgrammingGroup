@@ -2748,7 +2748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationToPlay: 1
-  movementSpeed: 10
+  movementSpeed: 15
 --- !u!135 &6991658567957549724
 SphereCollider:
   m_ObjectHideFlags: 0
