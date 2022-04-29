@@ -42,12 +42,12 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 normalHitAngle;
 
     //Animation
-//    private Animator animator;
+    private Animator animator;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-//        animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void OnMove(InputValue movementValue)
@@ -73,7 +73,7 @@ public class CharacterMovement : MonoBehaviour
         calculateCamera();
         calculateMovement();
         calculateGravity();
-//        updateAnimations();
+        updateAnimations();
 
         if(MovingOnGround == true)
         {
@@ -128,12 +128,12 @@ public class CharacterMovement : MonoBehaviour
         interactInput = false;
     }
 
-/*    void updateAnimations()
+    void updateAnimations()
     {
         animator.SetFloat("MovSpeed", controller.velocity.magnitude);
         animator.SetFloat("FallSpeed", velocity.y);
         animator.SetBool("OnGround", MovingOnGround);
-    }*/
+    }
 
     void calculateInput()
     {
