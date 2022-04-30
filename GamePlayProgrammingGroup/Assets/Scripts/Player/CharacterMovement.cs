@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
@@ -26,6 +27,15 @@ public class CharacterMovement : MonoBehaviour
     [HideInInspector]
     public bool interactInput;
 
+    //Locking On
+    public bool locked_on;
+    public Text lockedtext;
+    public Camera main_cam;
+    private float sensitivityX = 10.0f;
+    private Vector3 planardirection;
+    private Transform target;
+    public bool buffer;
+    public float timer;
 
     //Physics
     Vector3 intendedDirection;
@@ -48,6 +58,7 @@ public class CharacterMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+        lockedtext.enabled = false;
     }
 
     private void OnMove(InputValue movementValue)
@@ -75,7 +86,40 @@ public class CharacterMovement : MonoBehaviour
         calculateGravity();
         updateAnimations();
 
-        if(MovingOnGround == true)
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
+
+        if (timer <= 0)
+        {
+            buffer = false;
+        }
+
+        if (locked_on && target != null)
+        {
+            Vector3 camtotarget = target.position - main_cam.transform.position;
+            Vector3 planarcam = Vector3.ProjectOnPlane(camtotarget, Vector3.up);
+            planardirection = planarcam != Vector3.zero ? planarcam.normalized : planardirection;
+
+            Quaternion targetrotation = Quaternion.LookRotation(planardirection);
+            Quaternion newrotation = Quaternion.Slerp(main_cam.transform.rotation, targetrotation, Time.deltaTime * sensitivityX);
+            main_cam.transform.rotation = newrotation;
+
+            transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
+
+            if (Input.GetButton("Lockon") && buffer == false)
+            {
+                locked_on = false;
+                target = null;
+                buffer = true;
+                lockedtext.enabled = false;
+                timer = 1;
+
+            }
+        }
+
+        if (MovingOnGround == true)
         {
             movementSpeed = groundSpeed;
         }
@@ -236,5 +280,32 @@ public class CharacterMovement : MonoBehaviour
     public void updateMovementSpeed(float speedChange)
     {
         movementSpeed *= speedChange;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Enemy") && locked_on == false)
+        {
+            if (Input.GetButton("Lockon") && buffer == false)
+            {
+                locked_on = true;
+                target = other.transform;
+                buffer = true;
+                lockedtext.enabled = true;
+                timer = 1;
+                
+                    
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            locked_on = false;
+            lockedtext.enabled = false;
+            target = null;
+        }
     }
 }
