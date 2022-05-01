@@ -110,7 +110,7 @@ public class CharacterMovement : MonoBehaviour
 
             if (Input.GetButton("Lockon") && buffer == false)
             {
-                locked_on = false;
+                locked_on = true;
                 target = null;
                 buffer = true;
                 lockedtext.enabled = false;
