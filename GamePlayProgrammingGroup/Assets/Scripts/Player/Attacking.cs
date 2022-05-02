@@ -7,6 +7,8 @@ public class Attacking : MonoBehaviour
     private CharacterMovement movement;
 
     public bool isAttacking;
+    public bool isAttackingEnemy;
+    public bool inRangeOfEnemy;
     private bool damageOnce = true;
     private bool animOnce = true;
     private float attackTimer = 0.5f;
@@ -40,6 +42,10 @@ public class Attacking : MonoBehaviour
                 if(!isAttacking)
                 {
                     isAttacking = true;
+                    if(inRangeOfEnemy)
+                    {
+                        isAttackingEnemy = true;
+                    }
                 }
             }
         }

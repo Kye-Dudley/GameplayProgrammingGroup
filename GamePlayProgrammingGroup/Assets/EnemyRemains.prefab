@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 1568391796945864050}
   - component: {fileID: 9015869906274327181}
   m_Layer: 0
-  m_Name: Enemy (1)
+  m_Name: EnemyRemains
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 1568391796945864051}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 1568391796705303434}
   - {fileID: 1568391798483010151}
@@ -267,7 +267,7 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkingPointRange: 120
   timeBetweenAttacks: 0.5
-  enemySightRange: 50
+  enemySightRange: 20
   enemyAttackRange: 12
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   enemyMaxHealth: 100
   healthBarUI: {fileID: 1568391796770102599}
   slider: {fileID: 1568391797186881743}
-  remains: {fileID: 1568391796945864051, guid: df3660db125813f4a903b79b940a1925, type: 3}
+  remains: {fileID: 0}
   player: {fileID: 0}
   enemySmall: {fileID: 0}
   spawnTime: 0
@@ -303,8 +303,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 1, z: 1.2}
-  m_Center: {x: 0.22061431, y: 0, z: 0.1988948}
+  m_Size: {x: 1.3, y: 1, z: 1.3}
+  m_Center: {x: 0, y: 0, z: 0.046365287}
 --- !u!1 &1568391797186881728
 GameObject:
   m_ObjectHideFlags: 0

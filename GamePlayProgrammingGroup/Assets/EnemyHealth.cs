@@ -11,8 +11,11 @@ public class EnemyHealth : MonoBehaviour
     public GameObject healthBarUI;
     public Slider slider;
 
-    int damage = 10;
+    int damage = 50;
     public GameObject remains;
+    public GameObject player;
+
+    private bool isAttackingAlready = false;
 
     //New Enemy
     public GameObject enemySmall;
@@ -25,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
         enemyHealth = enemyMaxHealth;
         slider.value = calculateHealth();
         InvokeRepeating("Spawn", spawnTime, spawnTime);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -37,19 +41,25 @@ public class EnemyHealth : MonoBehaviour
             healthBarUI.SetActive(true);
         }
 
-        if (enemyHealth < 0)
-        {
-            Destroy(gameObject);
-        }
-
         if (enemyHealth > enemyMaxHealth)
         {
             enemyHealth = enemyMaxHealth;
         }
-        if (enemyHealth < 0)
+        if (enemyHealth <= 0)
         {
-            Instantiate(remains, transform.position, transform.rotation);
+            if (remains != null)
+            {
+                Instantiate(remains, transform.position, transform.rotation);
+            }
             Destroy(gameObject);
+        }
+        if(player.GetComponentInChildren<Attacking>().isAttackingEnemy && !isAttackingAlready)
+        {
+            isAttackingAlready = true;
+            Debug.Log("attacking cube");
+            TakeDamage();
+            player.GetComponentInChildren<Attacking>().isAttackingEnemy = false;
+            isAttackingAlready = false;
         }
     }
 
@@ -60,32 +70,24 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("attacking cube 1");
         if (other.tag == "PlayerWeapon")
         {
-            TakeDamage();
+            player.GetComponentInChildren<Attacking>().inRangeOfEnemy = true;
         }
 
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "PlayerWeapon")
+        {
+            player.GetComponentInChildren<Attacking>().inRangeOfEnemy = false;
+        }
     }
 
     private void TakeDamage()
     {
-
         enemyHealth -= damage;
-        if (enemyHealth < 50)
-        {
-            Instantiate(remains, transform.position, transform.rotation);
-            Destroy(gameObject);
-            gameObject.name.Equals("CubeRemains");
-            //gameObject.SetActive(true);
-        }
-
-        if (enemyHealth <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
-    }
-
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
-
     }
 
     void Spawn()
@@ -97,6 +99,6 @@ public class EnemyHealth : MonoBehaviour
 
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
-        Instantiate(enemySmall, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        //Instantiate(enemySmall, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
     }
 }

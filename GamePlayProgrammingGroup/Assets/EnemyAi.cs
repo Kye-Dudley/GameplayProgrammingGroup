@@ -8,10 +8,14 @@ public class EnemyAi : MonoBehaviour
     public NavMeshAgent agent;
 
     public Transform player;
+    public GameObject playerObject;
+    
 
     public LayerMask groundFloor;
     public LayerMask targetPlayer;
     public GameObject projectile;
+    private int lookSpeed = 2;
+    public GameObject firePoint;
 
     //Personal Moevement 
 
@@ -30,12 +34,12 @@ public class EnemyAi : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
     // Start is called before the first frame update
-    private void awake()
+    private void Start()
     {
         player = GameObject.Find("Player").transform;
+        playerObject = GameObject.Find("Player");
         agent = GetComponent<NavMeshAgent>();
     }
-
     // Update is called once per frame
     private void Update()
     {
@@ -77,12 +81,13 @@ public class EnemyAi : MonoBehaviour
     {
         agent.SetDestination(transform.position);
 
-        transform.LookAt(player);
+        //transform.LookAt(player);
+        FaceDirection(playerObject);
 
         if (!attackOccured)
         {
             //Attacking below
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Rigidbody rb = Instantiate(projectile, firePoint.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
             rb.AddForce(transform.up * 3f, ForceMode.Impulse);
 
@@ -95,6 +100,14 @@ public class EnemyAi : MonoBehaviour
     private void ResetAttack()
     {
         attackOccured = false;
+    }
+
+    public void FaceDirection(GameObject target)
+    {
+        Vector3 lookPos = target.transform.position - transform.position;
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * lookSpeed);
     }
 
 
