@@ -60,7 +60,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Sword")
+        if (other.tag == "PlayerWeapon")
         {
             TakeDamage();
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public class FollowSpline : MonoBehaviour
+public class splinenorandom : MonoBehaviour
 {
     public PathCreator path;
     public bool canMove = true;
@@ -26,12 +26,11 @@ public class FollowSpline : MonoBehaviour
     {
         transform.position = path.path.GetPointAtDistance(0 + offset);
         initialRotation = transform.rotation;
-        speed = Random.Range(1, 10);
     }
 
     void FixedUpdate()
     {
-        if(canMove == true)
+        if (canMove == true)
         {
             splineMove();
             splineRotate();
@@ -47,7 +46,7 @@ public class FollowSpline : MonoBehaviour
     void splineRotate()
     {
         transform.localRotation = path.path.GetRotationAtDistance(distanceProgress + offset, onSplineEnd);
-        if(updateRotation == rotation.none)
+        if (updateRotation == rotation.none)
         {
             transform.localRotation = initialRotation;
         }
@@ -85,5 +84,4 @@ public class FollowSpline : MonoBehaviour
 
         other.transform.SetParent(null);
     }
-
 }

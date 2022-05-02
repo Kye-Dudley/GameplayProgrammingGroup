@@ -65,9 +65,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void DestroyPlayer()
     {
-        Destroy(gameObject);
-
-        player.transform.position = respawnPoint.transform.position;
+        
 
     }
 }

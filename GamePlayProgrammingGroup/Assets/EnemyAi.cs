@@ -65,7 +65,7 @@ public class EnemyAi : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, groundFloor))
+        //if (Physics.Raycast(walkPoint, -transform.up, 2f, groundFloor))
             walkPointsSet = true;
     }
     private void ChasePlayer()
