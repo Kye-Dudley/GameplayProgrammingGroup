@@ -12,8 +12,11 @@ public class PlayerHealth : MonoBehaviour
     public GameObject healthBarUI;
     public Slider slider;
 
+    private CharacterMovement movement;
+    private bool reset;
+    public GameObject teleportTo;
+
     int damage = 2;
-    [SerializeField] private Transform respawnPoint;
     [SerializeField] private Transform player;
 
     void Start()
@@ -31,14 +34,19 @@ public class PlayerHealth : MonoBehaviour
             healthBarUI.SetActive(true);
         }
 
-        if (playerHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-
         if (playerHealth > playerMaxHealth)
         {
             playerHealth = playerMaxHealth;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (reset)
+        {
+            movement.enabled = true;
+            playerHealth = 100;
+            reset = false;
         }
     }
 
@@ -65,7 +73,13 @@ public class PlayerHealth : MonoBehaviour
 
     private void DestroyPlayer()
     {
-        
+        movement = GetComponentInChildren<CharacterMovement>();
+        movement.enabled = false;
+        transform.position = teleportTo.transform.position;
+        transform.rotation = teleportTo.transform.rotation;
 
+        reset = true;
     }
+
+
 }
