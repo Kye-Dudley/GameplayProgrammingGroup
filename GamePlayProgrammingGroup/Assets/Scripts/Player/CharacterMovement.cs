@@ -169,12 +169,12 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            if(takejumpcountOnce == true)
+            /*if(takejumpcountOnce == true)
             {
                 JumpCount = JumpCount - 1;
                 takejumpcountOnce = false;
 
-            }
+            }*/
             MovingOnGround = false;
             playerAirTime += Time.deltaTime;
         }
