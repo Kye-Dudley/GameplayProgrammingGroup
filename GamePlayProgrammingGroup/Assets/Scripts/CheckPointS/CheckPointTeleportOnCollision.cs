@@ -11,10 +11,10 @@ public class CheckPointTeleportOnCollision : MonoBehaviour
         if (other.tag == "Player")
         {
             movement = other.GetComponent<CharacterMovement>();
-            movement.enabled = false;
             CurrentCheckPoint currentPoint = other.GetComponent<CurrentCheckPoint>();
-            other.gameObject.transform.position = currentPoint.checkPointPosition;
+            movement.enabled = false;
             other.gameObject.transform.rotation = currentPoint.checkPointRotation;
+            other.gameObject.transform.position = currentPoint.checkPointPosition;
             reset = true;
         }
     }

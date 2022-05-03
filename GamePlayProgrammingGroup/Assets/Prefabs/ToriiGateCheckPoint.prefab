@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2627790165408325163}
+  - component: {fileID: 8293563735083502868}
   - component: {fileID: 1429913423971520910}
   - component: {fileID: 3764136169771787588}
   - component: {fileID: 3403623554780873876}
   - component: {fileID: 3403623554780873875}
   - component: {fileID: 3403623554780873874}
   - component: {fileID: 6023398454603169609}
-  - component: {fileID: 8293563735083502868}
   m_Layer: 0
   m_Name: ToriiGateCheckPoint
   m_TagString: Untagged
@@ -38,6 +38,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &8293563735083502868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3403623554780873873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9fe679ea17b7449a51214db58f00ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoint: {fileID: 7950396091604537074}
 --- !u!33 &1429913423971520910
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -143,19 +156,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 5.77, z: 5.34}
   m_Center: {x: 0, y: -0.29, z: 0}
---- !u!114 &8293563735083502868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3403623554780873873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9fe679ea17b7449a51214db58f00ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkPoint: {fileID: 7950396091604537074}
 --- !u!1 &8567654411233655830
 GameObject:
   m_ObjectHideFlags: 0

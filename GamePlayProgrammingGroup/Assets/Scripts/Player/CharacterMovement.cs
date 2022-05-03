@@ -25,9 +25,6 @@ public class CharacterMovement : MonoBehaviour
     private bool takejumpcountOnce = false;
     [HideInInspector]
     public bool interactInput;
-    [HideInInspector]
-    public Transform checkPointTransform;
-
 
     //Physics
     Vector3 intendedDirection;
