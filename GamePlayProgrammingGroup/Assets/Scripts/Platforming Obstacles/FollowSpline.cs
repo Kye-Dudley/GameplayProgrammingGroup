@@ -11,6 +11,7 @@ public class FollowSpline : MonoBehaviour
     public float distanceProgress;
     public float offset = 0;
     private Quaternion initialRotation;
+    public bool randomiseSpeed = false;
     public enum rotation
     {
         none,
@@ -26,7 +27,10 @@ public class FollowSpline : MonoBehaviour
     {
         transform.position = path.path.GetPointAtDistance(0 + offset);
         initialRotation = transform.rotation;
-        speed = Random.Range(1, 10);
+        if(randomiseSpeed)
+        {
+            speed = Random.Range(1, 10);
+        }
     }
 
     void FixedUpdate()

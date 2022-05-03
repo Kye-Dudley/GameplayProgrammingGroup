@@ -26,7 +26,6 @@ public class CharacterMovement : MonoBehaviour
     [HideInInspector]
     public bool interactInput;
 
-
     //Physics
     Vector3 intendedDirection;
     Vector3 velocity;
